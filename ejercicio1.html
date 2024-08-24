@@ -1,3 +1,5 @@
+<!-- Ejercicios JS & DOM
+By Sebastián Sánchez -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,14 +22,14 @@
                         <label>
                             Nombre completo
                         </label>
-                        <input id="nombre" type="text">
+                        <input id="nombre" type="text" class="nombre">
                         <p class="errorNombre" style="color:red;font-style: italic;"></p>
                     </div>
                     <div style="display: flex;flex-direction: column;">
                         <label>
                             Asunto
                         </label>
-                        <input id="asunto" type="text">
+                        <input id="asunto" type="text" class="asunto" >
                         <p class="errorAsunto" style="color:red;font-style: italic;"></p>
                     </div>
                 </div>
@@ -35,20 +37,59 @@
                     <label>
                         Mensaje
                     </label>
-                    <textarea id="mensaje"></textarea>
+                    <textarea id="mensaje" class="mensaje"></textarea>
                     <p class="errorMensaje" style="color:red;font-style: italic;"></p>
                 </div>
                 <div>
-                    <button id="botton" type="submit">
+                    <button id="button" type="submit">
                         Envíar mensaje
                     </button>
                 </div>
             </form>
         </div>
     </div>
+    
     <script>
-    // Escríbe aquí tu código
+    // Aquí mi script
+    //Defino variable para escuchar luego la acción del botón
+    var miBtn = document.getElementById("button");
+    
+    //Defino y valido la expresión regular
+    const pattern = /[a-zA-Z]/;
+   
+    miBtn.addEventListener('click',function(event){
+        event.preventDefault();
+        var nombreValor = document.querySelector(".nombre");
+        var asuntoValor = document.querySelector(".asunto");
+        var mensajeValor = document.querySelector(".mensaje");
+        
+        let resultRegexNombre = pattern.test(nombreValor.value);
+        let resultRegexAsunto = pattern.test(asuntoValor.value);
+        let resultRegexMensaje = pattern.test(mensajeValor.value);
+
+        if (nombreValor.value !="" && asuntoValor.value !="" && mensajeValor.value !="" && resultRegexNombre && resultRegexAsunto && resultRegexMensaje)
+         {
+            document.querySelector(".resultado").innerHTML = "¡Mensaje enviado con éxito! :)";
+            document.querySelector(".errorNombre").innerHTML = "";
+            document.querySelector(".errorAsunto").innerHTML = "";
+            document.querySelector(".errorMensaje").innerHTML = "";
+        } else if ( !resultRegexNombre || !resultRegexAsunto || !resultRegexMensaje){
+            document.querySelector(".errorNombre").innerHTML = "";
+            document.querySelector(".errorAsunto").innerHTML = "";
+            document.querySelector(".errorMensaje").innerHTML = "";
+            document.querySelector(".errorMensaje").innerHTML = "Ingresa solo letras (sin números ni caracteres especiales)";
+        }
+        
+        if(nombreValor.value ===""){
+            document.querySelector(".errorNombre").innerHTML = "El nombre es requerido";}
+        if(asuntoValor.value ===""){
+            document.querySelector(".errorAsunto").innerHTML = "El asunto es requerido";}
+        if(mensajeValor.value ===""){
+            document.querySelector(".errorMensaje").innerHTML = "El mensaje es requerido";}
+
+    });
     </script>
+
 </body>
 
 </html>
