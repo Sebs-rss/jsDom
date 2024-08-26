@@ -1,3 +1,4 @@
+<!-- By Sebastián Sánchez -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,21 +13,22 @@
             <h2>
                 Resultado: <span class="resultado"></span>
             </h2>
+            <span class="detalles"></span>
             <div>
                 <div>
-                    <div>
-                        <label for="">Valor 1</label>
-                        <input id="valor1" type="text">
+                    <div style="padding: 0.5rem; margin-top: 0.5rem ;">
+                        <label for="valor1">Valor 1</label>
+                        <input id="valor1" type="text" style="padding: 4px;">
                     </div>
-                    <div>
-                        <label for="">Valor 2</label>
-                        <input id="valor2" type="text">
+                    <div style="padding: 0.5rem; margin-top: 0.5rem ;">
+                        <label for="valor2">Valor 2</label>
+                        <input id="valor2" type="text" style="padding: 4px;">
                     </div>
                     <div style="display: flex">
-                        <button id="btn-sumar" type="button">
+                        <button id="btn-sumar" type="button" style="padding: 0.5rem; margin-right:1rem; margin-top: 1rem ;">
                             Sumar
                         </button>
-                        <button id="btn-restar" type="button">
+                        <button id="btn-restar" type="button" style="padding: 0.5rem; margin-right:1rem; margin-top: 1rem ;">
                             Restar
                         </button>
                     </div>
@@ -36,6 +38,36 @@
     </div>
     <script>
     // Escríbe aquí tu código
+
+    //Defino variables para rescatar los inputs
+    var valor1 = document.getElementById("valor1");
+    var valor2 = document.getElementById("valor2");
+    //var resultado = document.querySelector(".resultado");
+
+    //Defino eventos de escucha al hacer click en cada botón
+    var suma = document.getElementById("btn-sumar");
+    var resta = document.getElementById("btn-restar");
+
+    //Agrego las escuchas al hacer click en cada botón para dar las instrucciones específicas
+    suma.addEventListener('click', function (event) {
+        var sumaResultado = parseInt(valor1.value) + parseInt(valor2.value);
+        //Viendo que capture la variable adecuada
+        //alert(sumaResultado);
+        document.querySelector(".detalles").innerHTML = ""
+        document.querySelector(".resultado").innerHTML = `👉🏻la suma es ${sumaResultado}`;    
+    })
+    
+    resta.addEventListener('click', function (event) {
+        var restaResultado = parseInt(valor1.value) - parseInt(valor2.value);
+        //Viendo que capture la variable adecuada
+        //alert(sumaResultado);
+        if (restaResultado >= 0) {
+            document.querySelector(".resultado").innerHTML = `👉🏻la resta es ${restaResultado}`;
+    } else {
+        document.querySelector(".resultado").innerHTML = "👉🏻la resta es 0";
+        document.querySelector(".detalles").innerHTML = "(en realidad es negativo, pero aquí no lo mostramos)";
+    }    
+    })
     </script>
 </body>
 
