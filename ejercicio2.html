@@ -1,3 +1,4 @@
+<!-- By Sebastián Sánchez -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,6 +37,19 @@
 </div>
     <script>
     // Escríbe aquí tu código
+
+    //Defino la variable a escuchar el evento, para todos los botones que podrían ser presionados
+    var colorPick = document.getElementsByTagName("button");
+    
+    //Como son varios, hago el listener para cada uno, cada vez que se hace click toma el color de fondo
+    for (var i = 0; i < colorPick.length; i++) {
+        colorPick[i].addEventListener('click', function (event) {
+            var backgroundColor = event.target.style.backgroundColor;
+            //Asigno el color de fondo recogido antes a la caja de muestra
+            document.getElementById('caja').setAttribute('style', 'border:1px solid black;width: 100%;height: 100%;background-color: ' + backgroundColor);
+        });
+    }
+    
     </script>
 </body>
 
